@@ -1,0 +1,27 @@
+data wallet[](user,total_resources)
+
+event Transfer(from:address:indexed, to:address:indexed, value:uint256)
+
+# @@ creates a wallet
+def create_wallet():
+    self.wallet[msg.sender].user = msg.sender
+
+# @@ Set a amount of tokens in Wallet
+def token(initialSupply):
+    if not self.wallet[msg.sender].user:
+        self.create_wallet()
+
+    self.wallet[msg.sender].total_resources = initialSupply
+
+
+# @@ A simple transfer of tokens
+def transfer(from:address, to:address, value:uint256):
+    if self.wallet[from].total_resources >= value and self.wallet[to].total_resources + value >= self.wallet[to].total_resources:
+        self.wallet[ from].total_resources -= value
+        self.wallet[to].total_resources += value
+        return(1)
+    return(0)
+
+# @@ Check balance
+def balanceOf(add:address):
+    return(self.wallet[add].total_resources:uint256)
