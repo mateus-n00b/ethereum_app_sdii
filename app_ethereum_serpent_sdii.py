@@ -8,13 +8,13 @@
 from ethereum.tools import tester as t
 
 c = t.Chain()
-# t.STARTGAS
+t.STARTGAS = 100000
 
 # Set gas price by transaction
-t.GASPRICE = 100
+t.GASPRICE = 1
 
 # create a contract
-x0 = c.contract("contract.se",language='serpent')
+x0 = c.contract("token_app.se",language='serpent')
 # Mining some blocks
 c.mine(5)
 
