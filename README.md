@@ -1,6 +1,6 @@
 # Simple Token App
 
-* Simple application that create a token and perform transfers
+* Simple application using pyethereum that creates a token and perform transfers
 
 * Authors:
-  * Mateus Sousa & Adriana Ribeiro (UFBA - 2018)
+  * Mateus Sousa & Adriana Ribeiro (UFBA, 2018)
