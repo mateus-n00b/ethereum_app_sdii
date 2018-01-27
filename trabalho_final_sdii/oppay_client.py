@@ -14,5 +14,10 @@ client = xmlrpclib.ServerProxy("http://{0}:{1}".format(server_addr,DEFAULT_PORT)
 def main():
     global client
 
+    # Creating object client
     functions = client_functions.client_functions(client)
+    # Calling methods in server
     functions.show_available_methods()
+
+if __name__ == '__main__':
+    main()
