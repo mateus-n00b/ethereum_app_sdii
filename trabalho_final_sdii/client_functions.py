@@ -1,11 +1,12 @@
 # Client main functions
 #
-#
+# Mateus-n00b, January - 2018
 #
 class client_functions():
     def __init__(self,client):
         self.client = client
 
+    # Deprecated
     def show_available_methods(self):
         methods = self.client.system.listMethods()
         for m in methods:
@@ -32,4 +33,4 @@ class client_functions():
             return 0
 
     def hello_server(self):
-        return self.client.hello_server(key)    
+        return self.client.hello_server(key)
