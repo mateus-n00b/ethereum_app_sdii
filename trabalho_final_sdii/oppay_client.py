@@ -16,8 +16,9 @@ def main():
 
     # Creating object client
     functions = client_functions.client_functions(client)
-    # Calling methods in server
+    # Perform RPC
     functions.show_available_methods()
+    print client.__set_fees("")
 
 if __name__ == '__main__':
     main()

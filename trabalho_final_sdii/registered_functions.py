@@ -1,18 +1,21 @@
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 from SimpleXMLRPCServer import SimpleXMLRPCRequestHandler
 from ethereum.tools import tester as T
+import os
 
+# GLOBALS
 DEFAULT_PORT = 8000 # NOTE: if alterate this arg so you should update all whole code
+TRANSACTIONS = dict() # To Check the current TRANSACTIONS
+FEES = dict() # Record
+FEES_FILE = "fees.txt"
 
-
-
-
+# RPC
 class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
+# Setting up server
 server = SimpleXMLRPCServer(("localhost",DEFAULT_PORT),requestHandler=RequestHandler)
 server.register_introspection_functions()
-TRANSACTIONS = dict() # To Check the current TRANSACTIONS
 
 # Register functions
 # def adder_func(a,b):
@@ -27,6 +30,7 @@ TRANSACTIONS = dict() # To Check the current TRANSACTIONS
 
 class Services():
     global TRANSACTIONS
+    global FEES
 
     def upload_file(self, fp,text):
         try:
@@ -38,7 +42,7 @@ class Services():
             return 0
 
     def hello_server(self):
-        return 
+        return
 
     # Check if consumer have sufficient funds
     def validate_transaction(self,key):
@@ -51,8 +55,29 @@ class Services():
         except:
             return 0
 
+    def show_fees(self,fees_file):
+        return 1
+
 server.register_instance(Services())
+
+# Define the fees for each provided service
+def set_fees(fees_file):
+    try:
+        fp = open(fees_file,"rb")
+    except:
+        print "Error on read fees file!"
+        os.system("killall python2.7")
+
+    for rows in fp.readlines():
+        if rows[0] != "#": # Is a comment?
+            FEES[rows.split(':')[0]] = rows.split(':')[1].rstrip() # Read the fees file and update the FEES
 
 def run():
     global server
-    server.serve_forever()
+    set_fees(FEES_FILE)
+    # Have fees on file?
+    if len(FEES):
+        server.serve_forever()
+    else:
+        print "Check your fees file!"
+        os.system("killall python2.7")
