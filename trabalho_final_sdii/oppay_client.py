@@ -20,7 +20,7 @@ def show_servers_fees():
     index = int()
     while 1:
         index = int(raw_input("Choose a server (number): "))
-        if not option.has_key(index):
+        if not option.has_key(index): # Invalid option?
             print "Invalid option! (Press Ctrl+C to exit, if you wish.)"
             continue
         break
@@ -29,15 +29,15 @@ def show_servers_fees():
 
 def main():
     server_addr = show_servers_fees() # Client choose an server
-    server_addr = 'localhost' # TODO: Delete this line
+    server_addr = 'localhost' # TODO: < - ##### Delete this line #####
 
     try:
+        # Establishing a connection
         client = xmlrpclib.ServerProxy("http://{0}:{1}".format(server_addr,DEFAULT_PORT))
     except:
         print "Error on conect to server! Exiting"
         exit(-1)
 
-    # Creating object client
     functions = client_functions.client_functions(client)
     # Perform RPC
     functions.show_available_methods()

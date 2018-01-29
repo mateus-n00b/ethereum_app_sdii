@@ -57,7 +57,7 @@ class Services():
 
 server.register_instance(Services())
 
-# Define the fees for each provided service
+# Define the fees for each provided service from a fee file 
 def set_fees(fees_file):
     try:
         fp = open(fees_file,"rb")

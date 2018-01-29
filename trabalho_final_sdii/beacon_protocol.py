@@ -34,6 +34,6 @@ def beacon(sock):
         sock.sendto(hello_msg,("<broadcast>",BROAD_PORT))
 
 def run():
-    # Starting thread
+    # Starting beacon sending thread
     thread = Thread(group=None,target=beacon,args=(dp,))
     thread.start()
