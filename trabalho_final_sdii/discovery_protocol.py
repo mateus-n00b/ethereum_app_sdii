@@ -29,6 +29,7 @@ def discovery():
 
     start_timer = time.time() # To stop the search
 
+    print "Searching servers..."
     while time.time() - start_timer <= SEARCH_TIME:
         data, addr = sock.recvfrom(1024)
         if  "hello" in data and not servers.has_key(addr[0]):

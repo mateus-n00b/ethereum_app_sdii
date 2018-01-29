@@ -45,7 +45,7 @@ class Services():
         return
 
     # Check if consumer have sufficient funds
-    def validate_transaction(self,key):
+    def __validate_transaction(self,key):
         return 1
 
     def download_file(self,fp):
@@ -54,9 +54,6 @@ class Services():
             return down_file.read()
         except:
             return 0
-
-    def show_fees(self,fees_file):
-        return 1
 
 server.register_instance(Services())
 
