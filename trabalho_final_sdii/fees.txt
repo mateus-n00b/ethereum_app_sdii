@@ -1,3 +1,5 @@
 # Put here your Services and their respective fees
 # service:fee
 download_file:2
+upload_file:4
+contract:8

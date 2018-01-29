@@ -33,4 +33,4 @@ class client_functions():
             return 0
 
     def hello_server(self):
-        return self.client.hello_server(key)
+        return self.client.hello_server()

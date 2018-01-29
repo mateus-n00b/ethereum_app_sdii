@@ -16,19 +16,25 @@ def status_checker():
         print "Sorry, but we can't find a service provider in this area!"
         os.system("killall python2.7")
 
+
 def discovery():
     global BROAD_PORT
     global STATUS
+    global SEARCH_TIME
 
     sock.bind(('',BROAD_PORT))
+    servers = dict() # Servers found
     thread = Thread(group=None,target=status_checker)
     thread.start()
 
-    while 1:
+    start_timer = time.time() # To stop the search
+
+    while time.time() - start_timer <= SEARCH_TIME:
         data, addr = sock.recvfrom(1024)
-        if data == "hello":
-            STATUS = True # Server found!
-            return addr[0]
+        if  "hello" in data and not servers.has_key(addr[0]):
+            STATUS = True # One Server found!
+            servers[addr[0]] = str(data).replace('hello','')
+    return servers
 
 # Testing
 # print discovery()
